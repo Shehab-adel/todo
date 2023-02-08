@@ -6,6 +6,8 @@ import 'package:todo2/ui/todo_list_tab.dart';
 class HomeScreen extends StatefulWidget {
   static const routName = 'homescreen';
 
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -19,10 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 80,
-        title: Text('Route todo app'),
+        title: const Text('Route todo app'),
       ),
       floatingActionButton: FloatingActionButton(
-        shape: StadiumBorder(
+        shape: const StadiumBorder(
             side: BorderSide(
           color: Colors.white,
           width: 4,
@@ -30,13 +32,13 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           showAddTodoSheet();
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         clipBehavior: Clip.antiAlias,
         elevation: 0,
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         notchMargin: 8,
         child: BottomNavigationBar(
           showSelectedLabels: false,
@@ -47,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
             currentIndex = index;
             setState(() {});
           },
-          items: [
+          items: const [
             BottomNavigationBarItem(label: '', icon: Icon(Icons.list)),
             BottomNavigationBarItem(
               label: '',
@@ -61,8 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   List<Widget> tabs = [
-    TodoListTab(),
-    Settings(),
+    const TodoListTab(),
+    const Settings(),
   ];
 
   void showAddTodoSheet() {

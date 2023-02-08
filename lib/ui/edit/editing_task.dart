@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo2/date/firebase_utiles.dart';
 import 'package:todo2/date/todo.dart';
-
-import '../../date/todo.dart';
 import '../app_config_provider.dart';
 
 class EditingScreen extends StatefulWidget {
@@ -17,23 +16,21 @@ class EditingScreen extends StatefulWidget {
 
 class _EditingScreenState extends State<EditingScreen> {
   var formKey = GlobalKey<FormState>();
-
-  DateTime selectedDate = DateTime.now();
-
   var title = '';
   var description = '';
   late Todo item;
-  late AppConfigProvider provider;
+  DateTime selectDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     item = ModalRoute.of(context)!.settings.arguments as Todo;
-    provider = Provider.of<AppConfigProvider>(context);
+    String date = DateFormat("yyyy-MM-dd").format(item.dateTime);
+    item.dateTime = DateTime.parse(date);
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Todo List',
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         elevation: 0,
       ),
@@ -62,7 +59,7 @@ class _EditingScreenState extends State<EditingScreen> {
                   Text(
                     'Editing Task',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
@@ -77,7 +74,7 @@ class _EditingScreenState extends State<EditingScreen> {
                               labelText: 'Title',
                               labelStyle: Theme.of(context)
                                   .textTheme
-                                  .headline3!
+                                  .displaySmall!
                                   .copyWith(
                                     fontSize: 20,
                                   ),
@@ -98,7 +95,7 @@ class _EditingScreenState extends State<EditingScreen> {
                               labelText: 'description',
                               labelStyle: Theme.of(context)
                                   .textTheme
-                                  .headline3!
+                                  .displaySmall!
                                   .copyWith(
                                     fontSize: 20,
                                   ),
@@ -122,7 +119,7 @@ class _EditingScreenState extends State<EditingScreen> {
                   ),
                   Text(
                     'Select Time',
-                    style: Theme.of(context).textTheme.headline3!.copyWith(
+                    style: Theme.of(context).textTheme.displaySmall!.copyWith(
                           fontSize: 20,
                         ),
                   ),
@@ -136,7 +133,7 @@ class _EditingScreenState extends State<EditingScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(8),
                       child: Text(
-                        '${item.dateTime.day}/${item.dateTime.month}/${item.dateTime.year}',
+                        "${item.dateTime.day}/${item.dateTime.month}/${item.dateTime.year}",
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -168,7 +165,7 @@ class _EditingScreenState extends State<EditingScreen> {
   void showDateDialge() async {
     var newSelectedDate = await showDatePicker(
         context: context,
-        initialDate: selectedDate,
+        initialDate: selectDate,
         firstDate: DateTime.now(),
         lastDate: DateTime.now().add(const Duration(days: 365)));
     if (newSelectedDate != null) {

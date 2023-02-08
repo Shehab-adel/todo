@@ -6,8 +6,6 @@ import '../main.dart';
 class AppConfigProvider extends ChangeNotifier {
   String appLanguage = 'en';
   ThemeMode appTheme = ThemeMode.light;
-  DateTime selectDate = DateTime.now();
-  List<Todo> items = [];
 
   void changeAppLanguage(String newLang) {
     if (newLang == appLanguage) return;

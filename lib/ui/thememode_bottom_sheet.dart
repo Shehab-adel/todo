@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-
 import 'app_config_provider.dart';
 
 class ThemeModeBottomSheet extends StatefulWidget {
+  const ThemeModeBottomSheet({Key? key}) : super(key: key);
+
   @override
   State<ThemeModeBottomSheet> createState() => _ThemeModeBottomSheetState();
 }
@@ -18,7 +18,7 @@ class _ThemeModeBottomSheetState extends State<ThemeModeBottomSheet> {
     provider = Provider.of<AppConfigProvider>(context);
 
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       color: provider.containerbackgroundColor(),
       child: Column(
         children: [
@@ -30,7 +30,7 @@ class _ThemeModeBottomSheetState extends State<ThemeModeBottomSheet> {
                 ? unSelecteThemeMode(AppLocalizations.of(context)!.light)
                 : selecteThemeMode(AppLocalizations.of(context)!.light),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           InkWell(
@@ -52,8 +52,8 @@ class _ThemeModeBottomSheetState extends State<ThemeModeBottomSheet> {
       children: [
         Text(
           themeMode,
-          style: Theme.of(context).textTheme.headline4?.copyWith(
-            fontSize: 20,
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontSize: 20,
                 color: provider.bottomSheettextColor(),
               ),
         ),
@@ -71,8 +71,8 @@ class _ThemeModeBottomSheetState extends State<ThemeModeBottomSheet> {
       children: [
         Text(
           themeMode,
-          style: Theme.of(context).textTheme.headline4?.copyWith(
-            fontSize: 20,
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontSize: 20,
                 color: provider.bottomSheettextColor(),
               ),
         ),

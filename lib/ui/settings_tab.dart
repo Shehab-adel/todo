@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +7,8 @@ import 'package:todo2/ui/thememode_bottom_sheet.dart';
 import 'app_config_provider.dart';
 
 class Settings extends StatefulWidget {
+  const Settings({Key? key}) : super(key: key);
+
   @override
   State<Settings> createState() => _SettingsState();
 }
@@ -21,21 +22,21 @@ class _SettingsState extends State<Settings> {
 
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.all(20),
+        margin: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               AppLocalizations.of(context)!.language,
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context).textTheme.displaySmall,
             ),
             InkWell(
               onTap: () {
                 showLanguageBottomSheet();
               },
               child: Container(
-                margin: EdgeInsets.all(12),
-                padding: EdgeInsets.all(9),
+                margin: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(9),
                 decoration: BoxDecoration(
                   color: provider.containerbackgroundColor(),
                   border: Border.all(color: Colors.blue),
@@ -47,8 +48,8 @@ class _SettingsState extends State<Settings> {
                         provider.appLanguage == 'en'
                             ? AppLocalizations.of(context)!.english
                             : AppLocalizations.of(context)!.arabic,
-                        style: Theme.of(context).textTheme.headline4),
-                    Icon(
+                        style: Theme.of(context).textTheme.headlineMedium),
+                    const Icon(
                       Icons.arrow_drop_down_sharp,
                       color: Colors.blue,
                     ),
@@ -58,15 +59,15 @@ class _SettingsState extends State<Settings> {
             ),
             Text(
               AppLocalizations.of(context)!.mode,
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context).textTheme.displaySmall,
             ),
             InkWell(
               onTap: () {
                 showThemeModeBottomSheet();
               },
               child: Container(
-                margin: EdgeInsets.all(12),
-                padding: EdgeInsets.all(9),
+                margin: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(9),
                 decoration: BoxDecoration(
                     color: provider.containerbackgroundColor(),
                     border: Border.all(color: Colors.blueAccent)),
@@ -77,8 +78,8 @@ class _SettingsState extends State<Settings> {
                         provider.appTheme == ThemeMode.light
                             ? AppLocalizations.of(context)!.light
                             : AppLocalizations.of(context)!.dark,
-                        style: Theme.of(context).textTheme.headline4),
-                    Icon(Icons.arrow_drop_down_sharp, color: Colors.blue),
+                        style: Theme.of(context).textTheme.headlineMedium),
+                    const Icon(Icons.arrow_drop_down_sharp, color: Colors.blue),
                   ],
                 ),
               ),
@@ -93,7 +94,7 @@ class _SettingsState extends State<Settings> {
     showModalBottomSheet(
         context: context,
         builder: (buildContext) {
-          return LanguageBottomSheet();
+          return const LanguageBottomSheet();
         });
   }
 
@@ -101,7 +102,7 @@ class _SettingsState extends State<Settings> {
     showModalBottomSheet(
         context: context,
         builder: (buildContext) {
-          return ThemeModeBottomSheet();
+          return const ThemeModeBottomSheet();
         });
   }
 }

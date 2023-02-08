@@ -1,18 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:todo2/date/firebase_utiles.dart';
 import 'package:todo2/date/todo.dart';
 import 'package:todo2/ui/edit/editing_task.dart';
-
 import '../main.dart';
 import 'app_config_provider.dart';
 
+// ignore: must_be_immutable
 class TodoWidget extends StatefulWidget {
   Todo item;
 
-  TodoWidget(this.item);
+  TodoWidget(this.item, {Key? key}) : super(key: key);
 
   @override
   State<TodoWidget> createState() => _TodoWidgetState();
@@ -36,12 +35,15 @@ class _TodoWidgetState extends State<TodoWidget> {
           ),
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, EditingScreen.routeName,
-                  arguments: widget.item);
+              Navigator.pushNamed(
+                context,
+                EditingScreen.routeName,
+                arguments: widget.item,
+              );
             },
             child: Container(
               height: 120,
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: provider.isDark()
                     ? MyThemeData.darkScaffoldBackground
@@ -54,25 +56,29 @@ class _TodoWidgetState extends State<TodoWidget> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            widget.item.title,
-                            style:
-                                Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: textColor(),
-                                    ),
-                          ),
-                          Text(
-                            widget.item.description,
-                            style: Theme.of(context)
-                                .textTheme
-                                .subtitle2!
-                                .copyWith(color: textColor()),
-                          ),
-                        ],
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              widget.item.title,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                    color: textColor(),
+                                  ),
+                            ),
+                            Text(
+                              widget.item.description,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(color: textColor()),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -82,16 +88,16 @@ class _TodoWidgetState extends State<TodoWidget> {
                     },
                     child: widget.item.isDone
                         ? Container(
-                            margin: EdgeInsets.all(12),
+                            margin: const EdgeInsets.all(12),
                             child: Text(
                               'Done!',
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle2!
+                                  .titleSmall!
                                   .copyWith(color: textColor()),
                             ))
                         : Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 8, horizontal: 20),
                             decoration: BoxDecoration(
                               color: Colors.blue,
@@ -111,14 +117,14 @@ class _TodoWidgetState extends State<TodoWidget> {
         IconSlideAction(
           color: Colors.transparent,
           iconWidget: Container(
-            margin: EdgeInsets.symmetric(vertical: 12),
-            decoration: BoxDecoration(
+            margin: const EdgeInsets.symmetric(vertical: 12),
+            decoration: const BoxDecoration(
                 color: Colors.red,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(12),
                   bottomLeft: Radius.circular(12),
                 )),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -137,10 +143,10 @@ class _TodoWidgetState extends State<TodoWidget> {
           onTap: () {
             deleteTodo(widget.item)
                 .then((value) {
-              deleteshowMessage('Task is deletd succesfully');
-            })
+                  deleteshowMessage('Task is deletd succesfully');
+                })
                 .onError((error, stackTrace) {})
-                .timeout(Duration(seconds: 10), onTimeout: () {});
+                .timeout(const Duration(seconds: 10), onTimeout: () {});
           },
         )
       ],
@@ -158,7 +164,7 @@ class _TodoWidgetState extends State<TodoWidget> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('OK'))
+                  child: const Text('OK'))
             ],
           );
         });

@@ -3,7 +3,7 @@ import 'package:todo2/date/todo.dart';
 
 extension MyDateExtention on DateTime {
   DateTime getDateOnly() {
-    return DateTime(this.year, this.month, this.day);
+    return DateTime(year, month, day);
   }
 }
 

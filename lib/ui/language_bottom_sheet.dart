@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-
 import 'app_config_provider.dart';
 
 class LanguageBottomSheet extends StatefulWidget {
@@ -53,8 +52,8 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
       children: [
         Text(
           lang,
-          style: Theme.of(context).textTheme.headline4?.copyWith(
-            fontSize: 20,
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontSize: 20,
                 color: provider.bottomSheettextColor(),
               ),
         ),
@@ -72,8 +71,8 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
       children: [
         Text(
           lang,
-          style: Theme.of(context).textTheme.headline4?.copyWith(
-            fontSize: 20,
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontSize: 20,
                 color: provider.bottomSheettextColor(),
               ),
         ),

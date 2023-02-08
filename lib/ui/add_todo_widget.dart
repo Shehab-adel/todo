@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo2/date/firebase_utiles.dart';
+import 'package:todo2/ui/app_config_provider.dart';
 
 class AddToddBottomSheet extends StatefulWidget {
   const AddToddBottomSheet({Key? key}) : super(key: key);
@@ -14,9 +16,10 @@ class _AddToddBottomSheetState extends State<AddToddBottomSheet> {
   DateTime selectedDate = DateTime.now();
   var title = '';
   var description = '';
-
+  late AppConfigProvider provider;
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of<AppConfigProvider>(context);
     return Container(
       padding: const EdgeInsets.all(12),
       child: Column(
@@ -25,34 +28,33 @@ class _AddToddBottomSheetState extends State<AddToddBottomSheet> {
           Text(
             'Add Todo',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
           Form(
             key: formKey,
             child: Column(
-                children: [
-                  TextFormField(
-                    decoration: const InputDecoration(
+              children: [
+                TextFormField(
+                  decoration: const InputDecoration(
                     labelText: 'Title',
                   ),
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'please enter todo title';
-                      }
-                      return null;
-                    },
-                    onChanged: (text) {
-                      title = text;
-                    Form.of(context);
+                  validator: (text) {
+                    if (text == null || text.isEmpty) {
+                      return 'please enter todo title';
+                    }
+                    return null;
                   },
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
+                  onChanged: (text) {
+                    title = text;
+                  },
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
                     labelText: 'Description',
                   ),
-                    minLines: 3,
-                    maxLines: 3,
-                    validator: (text) {
+                  minLines: 3,
+                  maxLines: 3,
+                  validator: (text) {
                     if (text == null || text.isEmpty) {
                       return 'please enter description';
                     }
@@ -65,10 +67,10 @@ class _AddToddBottomSheetState extends State<AddToddBottomSheet> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Text('Date'),
+          const Text('Date'),
           InkWell(
             onTap: () {
               showDateDialge();
@@ -97,10 +99,12 @@ class _AddToddBottomSheetState extends State<AddToddBottomSheet> {
       return;
     }
     addTodoFireStore(title, description, selectedDate).then((value) {
+      Navigator.pop(context);
       addShowMessage('Task is added succesfully');
     }).onError((error, stackTrace) {
-      print('Error adding');
-    }).timeout(Duration(seconds: 20), onTimeout: () {});
+      Navigator.pop(context);
+      addShowMessage('Error');
+    }).timeout(const Duration(seconds: 20), onTimeout: () {});
   }
 
   void showDateDialge() async {
@@ -108,7 +112,7 @@ class _AddToddBottomSheetState extends State<AddToddBottomSheet> {
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(Duration(days: 365)));
+        lastDate: DateTime.now().add(const Duration(days: 365)));
     if (newSelectedDate != null) {
       selectedDate = newSelectedDate;
       setState(() {});
@@ -126,7 +130,7 @@ class _AddToddBottomSheetState extends State<AddToddBottomSheet> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('OK'))
+                  child: const Text('OK'))
             ],
           );
         });

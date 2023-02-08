@@ -1,5 +1,4 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -14,10 +13,12 @@ void main() async {
       create: (BuildContext context) {
         return AppConfigProvider();
       },
-      child: MyApp()));
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -30,8 +31,8 @@ class MyApp extends StatelessWidget {
       theme: provider.isDark() ? MyThemeData.darkTheme : MyThemeData.lightTheme,
       themeMode: provider.appTheme,
       routes: {
-        HomeScreen.routName: (buildContext) => HomeScreen(),
-        EditingScreen.routeName: (buildContext) => EditingScreen(),
+        HomeScreen.routName: (buildContext) => const HomeScreen(),
+        EditingScreen.routeName: (buildContext) => const EditingScreen(),
       },
       initialRoute: HomeScreen.routName,
     );
@@ -47,34 +48,34 @@ class MyThemeData {
   static final ThemeData lightTheme = ThemeData(
     primarySwatch: Colors.blue,
     scaffoldBackgroundColor: lightScaffoldBackground,
-    textTheme: TextTheme(
-        headline1: TextStyle(
+    textTheme: const TextTheme(
+        displayLarge: TextStyle(
           fontSize: 32,
           color: Colors.black45,
         ),
-        headline2: TextStyle(
+        displayMedium: TextStyle(
           fontSize: 28,
           color: Colors.black45,
         ),
-        headline3: TextStyle(
+        displaySmall: TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.black,
           fontSize: 14,
         ),
-        headline4: TextStyle(
+        headlineMedium: TextStyle(
           color: Colors.blue,
           fontSize: 12,
         ),
-        headline6: TextStyle(
+        titleLarge: TextStyle(
           fontSize: 22,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
-        subtitle1: TextStyle(
+        titleMedium: TextStyle(
           fontSize: 18,
           color: Colors.black,
         ),
-        subtitle2: TextStyle(
+        titleSmall: TextStyle(
           fontSize: 16,
           color: Colors.black,
         )),
@@ -84,38 +85,38 @@ class MyThemeData {
     primarySwatch: Colors.blue,
     scaffoldBackgroundColor: darkScaffoldBackground,
     primaryColor: MyThemeData.darkScaffoldBackground,
-    textTheme: TextTheme(
-        headline1: TextStyle(
+    textTheme: const TextTheme(
+        displayLarge: TextStyle(
           fontSize: 32,
           color: Colors.white54,
         ),
-        headline2: TextStyle(
+        displayMedium: TextStyle(
           fontSize: 28,
           color: Colors.white54,
         ),
-        headline3: TextStyle(
+        displaySmall: TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.white,
           fontSize: 14,
         ),
-        headline4: TextStyle(
+        headlineMedium: TextStyle(
           color: Colors.blue,
           fontSize: 12,
         ),
-        headline6: TextStyle(
+        titleLarge: TextStyle(
           fontSize: 22,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
-        subtitle1: TextStyle(
+        titleMedium: TextStyle(
           fontSize: 18,
           color: Colors.white,
         ),
-        subtitle2: TextStyle(
+        titleSmall: TextStyle(
           fontSize: 16,
           color: Colors.white,
         )),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: MyThemeData.darkScaffoldBackground,
         selectedIconTheme: IconThemeData(
           color: Colors.blue,
@@ -125,4 +126,3 @@ class MyThemeData {
         )),
   );
 }
-
