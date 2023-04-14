@@ -79,10 +79,10 @@ class _TodoListTabState extends State<TodoListTab> {
                 snapshot.data!.docs.map((dec) => dec.data()).toList();
 
             return ListView.builder(
+              itemCount: items.length,
               itemBuilder: (buildContext, index) {
                 return TodoWidget(items[index]);
               },
-              itemCount: items.length,
             );
           },
         )),

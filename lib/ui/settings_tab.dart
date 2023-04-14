@@ -19,7 +19,6 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<AppConfigProvider>(context);
-
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.all(20),
@@ -38,7 +37,7 @@ class _SettingsState extends State<Settings> {
                 margin: const EdgeInsets.all(12),
                 padding: const EdgeInsets.all(9),
                 decoration: BoxDecoration(
-                  color: provider.containerbackgroundColor(),
+                  color: provider.containerBackgroundColor(),
                   border: Border.all(color: Colors.blue),
                 ),
                 child: Row(
@@ -69,7 +68,7 @@ class _SettingsState extends State<Settings> {
                 margin: const EdgeInsets.all(12),
                 padding: const EdgeInsets.all(9),
                 decoration: BoxDecoration(
-                    color: provider.containerbackgroundColor(),
+                    color: provider.containerBackgroundColor(),
                     border: Border.all(color: Colors.blueAccent)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+
 import 'app_config_provider.dart';
 
 class LanguageBottomSheet extends StatefulWidget {
@@ -19,7 +20,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
 
     return Container(
       padding: const EdgeInsets.all(12),
-      color: provider.containerbackgroundColor(),
+      color: provider.containerBackgroundColor(),
       child: Column(
         children: [
           InkWell(
@@ -27,8 +28,8 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
               provider.changeAppLanguage('en');
             },
             child: provider.appLanguage == 'en'
-                ? selecteLanguage(AppLocalizations.of(context)!.english)
-                : unSelecteLanguage(AppLocalizations.of(context)!.english),
+                ? selectedLanguage(AppLocalizations.of(context)!.english)
+                : unSelectedLanguage(AppLocalizations.of(context)!.english),
           ),
           const SizedBox(
             height: 10,
@@ -38,15 +39,15 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
               provider.changeAppLanguage('ar');
             },
             child: provider.appLanguage == 'ar'
-                ? selecteLanguage(AppLocalizations.of(context)!.arabic)
-                : unSelecteLanguage(AppLocalizations.of(context)!.arabic),
+                ? selectedLanguage(AppLocalizations.of(context)!.arabic)
+                : unSelectedLanguage(AppLocalizations.of(context)!.arabic),
           ),
         ],
       ),
     );
   }
 
-  Widget selecteLanguage(String lang) {
+  Widget selectedLanguage(String lang) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -54,18 +55,18 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
           lang,
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 fontSize: 20,
-                color: provider.bottomSheettextColor(),
+                color: provider.bottomSheetTextColor(),
               ),
         ),
         Icon(
           Icons.check,
-          color: provider.bottomSheettextColor(),
+          color: provider.bottomSheetTextColor(),
         ),
       ],
     );
   }
 
-  Widget unSelecteLanguage(String lang) {
+  Widget unSelectedLanguage(String lang) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -73,7 +74,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
           lang,
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 fontSize: 20,
-                color: provider.bottomSheettextColor(),
+                color: provider.bottomSheetTextColor(),
               ),
         ),
       ],

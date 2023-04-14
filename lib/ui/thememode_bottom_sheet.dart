@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+
 import 'app_config_provider.dart';
 
 class ThemeModeBottomSheet extends StatefulWidget {
@@ -19,7 +20,7 @@ class _ThemeModeBottomSheetState extends State<ThemeModeBottomSheet> {
 
     return Container(
       padding: const EdgeInsets.all(12),
-      color: provider.containerbackgroundColor(),
+      color: provider.containerBackgroundColor(),
       child: Column(
         children: [
           InkWell(
@@ -53,13 +54,13 @@ class _ThemeModeBottomSheetState extends State<ThemeModeBottomSheet> {
         Text(
           themeMode,
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontSize: 20,
-                color: provider.bottomSheettextColor(),
+            fontSize: 20,
+                color: provider.bottomSheetTextColor(),
               ),
         ),
         Icon(
           Icons.check,
-          color: provider.bottomSheettextColor(),
+          color: provider.bottomSheetTextColor(),
         ),
       ],
     );
@@ -72,8 +73,8 @@ class _ThemeModeBottomSheetState extends State<ThemeModeBottomSheet> {
         Text(
           themeMode,
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontSize: 20,
-                color: provider.bottomSheettextColor(),
+            fontSize: 20,
+                color: provider.bottomSheetTextColor(),
               ),
         ),
       ],

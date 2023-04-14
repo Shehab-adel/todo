@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:todo2/date/firebase_utiles.dart';
 import 'package:todo2/date/todo.dart';
 import 'package:todo2/ui/edit/editing_task.dart';
+
 import '../main.dart';
 import 'app_config_provider.dart';
 
@@ -143,7 +144,7 @@ class _TodoWidgetState extends State<TodoWidget> {
           onTap: () {
             deleteTodo(widget.item)
                 .then((value) {
-                  deleteshowMessage('Task is deletd succesfully');
+                  deleteShowMessage('Task is deleted successfully');
                 })
                 .onError((error, stackTrace) {})
                 .timeout(const Duration(seconds: 10), onTimeout: () {});
@@ -153,18 +154,22 @@ class _TodoWidgetState extends State<TodoWidget> {
     );
   }
 
-  void deleteshowMessage(String message) {
+  void deleteShowMessage(String message) {
     showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (buildContext) {
           return AlertDialog(
-            content: Text(message),
+            backgroundColor: provider.containerBackgroundColor(),
+            content:
+                Text(message, style: Theme.of(context).textTheme.titleSmall),
             actions: [
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('OK'))
+                  child:
+                      Text('OK', style: Theme.of(context).textTheme.titleSmall))
             ],
           );
         });

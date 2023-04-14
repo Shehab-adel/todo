@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:todo2/date/firebase_utiles.dart';
 import 'package:todo2/ui/app_config_provider.dart';
 
+import '../functions/add_show_message.dart';
+
 class AddToddBottomSheet extends StatefulWidget {
   const AddToddBottomSheet({Key? key}) : super(key: key);
 
@@ -22,6 +24,7 @@ class _AddToddBottomSheetState extends State<AddToddBottomSheet> {
     provider = Provider.of<AppConfigProvider>(context);
     return Container(
       padding: const EdgeInsets.all(12),
+      color: provider.containerBackgroundColor(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -35,9 +38,9 @@ class _AddToddBottomSheetState extends State<AddToddBottomSheet> {
             child: Column(
               children: [
                 TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Title',
-                  ),
+                  decoration: InputDecoration(
+                      labelText: 'Title',
+                      labelStyle: Theme.of(context).textTheme.titleSmall),
                   validator: (text) {
                     if (text == null || text.isEmpty) {
                       return 'please enter todo title';
@@ -49,9 +52,9 @@ class _AddToddBottomSheetState extends State<AddToddBottomSheet> {
                   },
                 ),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Description',
-                  ),
+                  decoration: InputDecoration(
+                      labelText: 'Description',
+                      labelStyle: Theme.of(context).textTheme.titleSmall),
                   minLines: 3,
                   maxLines: 3,
                   validator: (text) {
@@ -73,13 +76,14 @@ class _AddToddBottomSheetState extends State<AddToddBottomSheet> {
           const Text('Date'),
           InkWell(
             onTap: () {
-              showDateDialge();
+              showDateDialog();
             },
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: Text(
                 '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
                 textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
           ),
@@ -99,15 +103,13 @@ class _AddToddBottomSheetState extends State<AddToddBottomSheet> {
       return;
     }
     addTodoFireStore(title, description, selectedDate).then((value) {
-      Navigator.pop(context);
-      addShowMessage('Task is added succesfully');
+      addShowMessage('Task is added successfully', context);
     }).onError((error, stackTrace) {
-      Navigator.pop(context);
-      addShowMessage('Error');
+      addShowMessage('Error', context);
     }).timeout(const Duration(seconds: 20), onTimeout: () {});
   }
 
-  void showDateDialge() async {
+  void showDateDialog() async {
     var newSelectedDate = await showDatePicker(
         context: context,
         initialDate: selectedDate,
@@ -117,22 +119,5 @@ class _AddToddBottomSheetState extends State<AddToddBottomSheet> {
       selectedDate = newSelectedDate;
       setState(() {});
     }
-  }
-
-  void addShowMessage(String message) {
-    showDialog(
-        context: context,
-        builder: (buildContext) {
-          return AlertDialog(
-            content: Text(message),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('OK'))
-            ],
-          );
-        });
   }
 }

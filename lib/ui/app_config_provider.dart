@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo2/date/todo.dart';
 
 import '../main.dart';
 
@@ -8,7 +7,10 @@ class AppConfigProvider extends ChangeNotifier {
   ThemeMode appTheme = ThemeMode.light;
 
   void changeAppLanguage(String newLang) {
-    if (newLang == appLanguage) return;
+    if (newLang == appLanguage) {
+      print('$appLanguage************');
+      return;
+    }
     appLanguage = newLang;
     notifyListeners();
   }
@@ -23,11 +25,11 @@ class AppConfigProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Color containerbackgroundColor() {
+  Color containerBackgroundColor() {
     return isDark() ? MyThemeData.darkScaffoldBackground : Colors.white;
   }
 
-  Color bottomSheettextColor() {
+  Color bottomSheetTextColor() {
     return isDark() ? Colors.white : Colors.black;
   }
 }

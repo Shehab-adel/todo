@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo2/date/firebase_utiles.dart';
 import 'package:todo2/date/todo.dart';
+import 'package:todo2/functions/add_show_message.dart';
+
 import '../app_config_provider.dart';
 
 class EditingScreen extends StatefulWidget {
@@ -20,9 +22,11 @@ class _EditingScreenState extends State<EditingScreen> {
   var description = '';
   late Todo item;
   DateTime selectDate = DateTime.now();
+  late AppConfigProvider provider;
 
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of<AppConfigProvider>(context);
     item = ModalRoute.of(context)!.settings.arguments as Todo;
     String date = DateFormat("yyyy-MM-dd").format(item.dateTime);
     item.dateTime = DateTime.parse(date);
@@ -47,7 +51,7 @@ class _EditingScreenState extends State<EditingScreen> {
             margin: EdgeInsets.all(MediaQuery.of(context).size.height * .04),
             padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.05),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: provider.containerBackgroundColor(),
               borderRadius: BorderRadius.circular(20),
             ),
             height: MediaQuery.of(context).size.height * 0.8,
@@ -60,9 +64,9 @@ class _EditingScreenState extends State<EditingScreen> {
                     'Editing Task',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
                   ),
                   Form(
                       key: formKey,
@@ -76,8 +80,8 @@ class _EditingScreenState extends State<EditingScreen> {
                                   .textTheme
                                   .displaySmall!
                                   .copyWith(
-                                    fontSize: 20,
-                                  ),
+                                fontSize: 20,
+                              ),
                             ),
                             validator: (text) {
                               if (text == null || text.isEmpty) {
@@ -97,8 +101,8 @@ class _EditingScreenState extends State<EditingScreen> {
                                   .textTheme
                                   .displaySmall!
                                   .copyWith(
-                                    fontSize: 20,
-                                  ),
+                                fontSize: 20,
+                              ),
                             ),
                             minLines: 3,
                             maxLines: 3,
@@ -120,21 +124,22 @@ class _EditingScreenState extends State<EditingScreen> {
                   Text(
                     'Select Time',
                     style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                          fontSize: 20,
-                        ),
+                      fontSize: 20,
+                    ),
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   InkWell(
                     onTap: () {
-                      showDateDialge();
+                      showDateDialog();
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8),
                       child: Text(
                         "${item.dateTime.day}/${item.dateTime.month}/${item.dateTime.year}",
                         textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.displaySmall,
                       ),
                     ),
                   ),
@@ -162,7 +167,7 @@ class _EditingScreenState extends State<EditingScreen> {
     );
   }
 
-  void showDateDialge() async {
+  void showDateDialog() async {
     var newSelectedDate = await showDatePicker(
         context: context,
         initialDate: selectDate,
@@ -176,7 +181,7 @@ class _EditingScreenState extends State<EditingScreen> {
 
   void editTask() {
     editTaskDetails(item).then((value) {
-      Navigator.pop(context);
+      addShowMessage('Task was editing successfully', context);
     });
   }
 }
