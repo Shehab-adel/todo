@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-
 import 'app_config_provider.dart';
 
 class ThemeModeBottomSheet extends StatefulWidget {
@@ -17,7 +16,6 @@ class _ThemeModeBottomSheetState extends State<ThemeModeBottomSheet> {
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<AppConfigProvider>(context);
-
     return Container(
       padding: const EdgeInsets.all(12),
       color: provider.containerBackgroundColor(),
@@ -27,9 +25,9 @@ class _ThemeModeBottomSheetState extends State<ThemeModeBottomSheet> {
             onTap: () {
               provider.changeAppThemeMode(ThemeMode.light);
             },
-            child: provider.isDark()
-                ? unSelecteThemeMode(AppLocalizations.of(context)!.light)
-                : selecteThemeMode(AppLocalizations.of(context)!.light),
+            child: provider.appTheme == ThemeMode.light
+                ? selecteThemeMode(AppLocalizations.of(context)!.light)
+                : unSelecteThemeMode(AppLocalizations.of(context)!.light),
           ),
           const SizedBox(
             height: 10,
@@ -38,7 +36,7 @@ class _ThemeModeBottomSheetState extends State<ThemeModeBottomSheet> {
             onTap: () {
               provider.changeAppThemeMode(ThemeMode.dark);
             },
-            child: provider.isDark()
+            child: provider.appTheme == ThemeMode.dark
                 ? selecteThemeMode(AppLocalizations.of(context)!.dark)
                 : unSelecteThemeMode(AppLocalizations.of(context)!.dark),
           ),
@@ -54,7 +52,7 @@ class _ThemeModeBottomSheetState extends State<ThemeModeBottomSheet> {
         Text(
           themeMode,
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            fontSize: 20,
+                fontSize: 20,
                 color: provider.bottomSheetTextColor(),
               ),
         ),
@@ -73,7 +71,7 @@ class _ThemeModeBottomSheetState extends State<ThemeModeBottomSheet> {
         Text(
           themeMode,
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            fontSize: 20,
+                fontSize: 20,
                 color: provider.bottomSheetTextColor(),
               ),
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../functions/get_app_language_from_sharedPrefs.dart';
 import 'app_config_provider.dart';
 
 class LanguageBottomSheet extends StatefulWidget {
@@ -17,7 +18,6 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<AppConfigProvider>(context);
-
     return Container(
       padding: const EdgeInsets.all(12),
       color: provider.containerBackgroundColor(),
@@ -27,7 +27,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
             onTap: () {
               provider.changeAppLanguage('en');
             },
-            child: provider.appLanguage == 'en'
+            child: getAppLanguageFromSharedPrefres() == 'en'
                 ? selectedLanguage(AppLocalizations.of(context)!.english)
                 : unSelectedLanguage(AppLocalizations.of(context)!.english),
           ),
@@ -38,7 +38,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
             onTap: () {
               provider.changeAppLanguage('ar');
             },
-            child: provider.appLanguage == 'ar'
+            child: getAppLanguageFromSharedPrefres() == 'ar'
                 ? selectedLanguage(AppLocalizations.of(context)!.arabic)
                 : unSelectedLanguage(AppLocalizations.of(context)!.arabic),
           ),

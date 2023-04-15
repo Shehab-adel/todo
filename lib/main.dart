@@ -2,13 +2,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo2/functions/get_app_theme_from_sharedPrefres.dart';
 import 'package:todo2/ui/app_config_provider.dart';
 import 'package:todo2/ui/edit/editing_task.dart';
 import 'package:todo2/ui/homescreen.dart';
 
+import 'functions/get_app_language_from_sharedPrefs.dart';
+
+late SharedPreferences prefs;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  prefs = await SharedPreferences.getInstance();
   runApp(ChangeNotifierProvider(
       create: (BuildContext context) {
         return AppConfigProvider();
@@ -23,13 +29,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
+    provider.appTheme = getAppThemeFromSharedPrefres();
+    provider.appLanguage = getAppLanguageFromSharedPrefres();
     return MaterialApp(
       title: 'Todo',
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: Locale(provider.appLanguage),
+      locale: Locale(getAppLanguageFromSharedPrefres()),
       theme: provider.isDark() ? MyThemeData.darkTheme : MyThemeData.lightTheme,
-      themeMode: provider.appTheme,
+      themeMode: getAppThemeFromSharedPrefres(),
       routes: {
         HomeScreen.routName: (buildContext) => const HomeScreen(),
         EditingScreen.routeName: (buildContext) => const EditingScreen(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:todo2/functions/get_app_language_from_sharedPrefs.dart';
 import 'package:todo2/ui/language_bottom_sheet.dart';
 import 'package:todo2/ui/thememode_bottom_sheet.dart';
 
@@ -25,10 +26,8 @@ class _SettingsState extends State<Settings> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              AppLocalizations.of(context)!.language,
-              style: Theme.of(context).textTheme.displaySmall,
-            ),
+            Text(AppLocalizations.of(context)!.language,
+                style: Theme.of(context).textTheme.displaySmall),
             InkWell(
               onTap: () {
                 showLanguageBottomSheet();
@@ -44,7 +43,7 @@ class _SettingsState extends State<Settings> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                        provider.appLanguage == 'en'
+                        getAppLanguageFromSharedPrefres() == 'en'
                             ? AppLocalizations.of(context)!.english
                             : AppLocalizations.of(context)!.arabic,
                         style: Theme.of(context).textTheme.headlineMedium),

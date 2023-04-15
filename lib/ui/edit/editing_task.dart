@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:todo2/date/firebase_utiles.dart';
 import 'package:todo2/date/todo.dart';
 import 'package:todo2/functions/add_show_message.dart';
-
 import '../app_config_provider.dart';
 
 class EditingScreen extends StatefulWidget {
@@ -64,9 +63,9 @@ class _EditingScreenState extends State<EditingScreen> {
                     'Editing Task',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
                   ),
                   Form(
                       key: formKey,
@@ -80,8 +79,8 @@ class _EditingScreenState extends State<EditingScreen> {
                                   .textTheme
                                   .displaySmall!
                                   .copyWith(
-                                fontSize: 20,
-                              ),
+                                    fontSize: 20,
+                                  ),
                             ),
                             validator: (text) {
                               if (text == null || text.isEmpty) {
@@ -101,8 +100,8 @@ class _EditingScreenState extends State<EditingScreen> {
                                   .textTheme
                                   .displaySmall!
                                   .copyWith(
-                                fontSize: 20,
-                              ),
+                                    fontSize: 20,
+                                  ),
                             ),
                             minLines: 3,
                             maxLines: 3,
@@ -124,8 +123,8 @@ class _EditingScreenState extends State<EditingScreen> {
                   Text(
                     'Select Time',
                     style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                      fontSize: 20,
-                    ),
+                          fontSize: 20,
+                        ),
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,

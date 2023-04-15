@@ -4,5 +4,8 @@
   "english": "English",
   "arabic": "Arabic",
   "light": "Light",
-  "dark": "Dark"
+  "dark": "Dark",
+  "titlealert":"Are you sure you want to exit the app?",
+  "confirm":"Confirm",
+  "cancel":"Cancel"
 }
